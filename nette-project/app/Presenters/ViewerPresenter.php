@@ -5,17 +5,19 @@ declare(strict_types=1);
 namespace App\Presenters;
 
 use Nette;
-
 use App\Model\Ukazovator;
 use Nette\Database\ResultSet;
 use Nette\Application\UI\Form;
 use Nette\Utils\Html;
+
+use GroupFormFactory;
 
 final class ViewerPresenter extends Nette\Application\UI\Presenter
 {
     public function __construct(
         private Ukazovator $ukazovator,
         private Nette\Database\Explorer $db,
+        private GroupFormFactory $groupFormFactory,
     ){}
     
     public function renderDefault():void{
@@ -60,9 +62,7 @@ final class ViewerPresenter extends Nette\Application\UI\Presenter
     }
 
     protected function createComponentGroupForm(): Form{
-        $form = new Form;
-        $form->addText('name', 'Jméno skupiny')->setRequired();
-        $form->addSubmit('send', 'Create');
+        $form = $this->groupFormFactory->create();
         $form->onSuccess[] = [$this, 'groupFormSucceeded'];
         return $form;
     }

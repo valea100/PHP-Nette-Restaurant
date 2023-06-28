@@ -8,18 +8,17 @@ use Nette;
 use Nette\Application\UI\Form;
 
 use App\Model\Loginator;
+use SignInFormFactory;
 
 final class SignPresenter extends Nette\Application\UI\Presenter
 {
     public function __construct(
         private Loginator $loginator,
+        private SignInFormFactory $signInFormFactory,
     ){}
     
     protected function createComponentSignInForm(): Form{
-        $form = new Form;
-        $form->addText('email', 'email')->setRequired();
-        $form->addPassword('password', 'password')->setRequired();
-        $form->addSubmit('send', 'send');
+        $form = $this->signInFormFactory->create();
         $form->onSuccess[] = [$this, 'formSucceeded'];
         return $form;
     }

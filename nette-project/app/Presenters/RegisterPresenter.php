@@ -8,21 +8,16 @@ use Nette;
 use Nette\Application\UI\Form;
 
 use App\Model\Registrator;
+use RegisterFormFactory;
 
 final class RegisterPresenter extends Nette\Application\UI\Presenter
 {
     public function __construct(
         private Registrator $registrator,
+        private RegisterFormFactory $registerFormFactory,
     ){}
     protected function createComponentRegisterForm(): Form{
-        $form = new Form;
-        $form->addText('firstname', 'Jméno')->setRequired();
-        $form->addText('lastname', 'Příjmení')->setRequired();
-        $form->addText('email', 'email')->setRequired();
-        $form->addPassword('password', 'password')->setRequired();
-        $form->addPassword('password2', 'password again')->setRequired();
-        $form->addInteger('group_id', 'grupa');
-        $form->addSubmit('send', 'send');
+        $form = $this->registerFormFactory->create();
         $form->onSuccess[] = [$this, 'formSucceeded'];
         return $form;
     }

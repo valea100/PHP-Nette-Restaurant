@@ -2,34 +2,25 @@
 namespace App\Model;
 
 use Nette;
-
+use Nette\Security\Passwords;
 
 final class Loginator
 {
     public function __construct(
         private Nette\Database\Explorer $database,
+        private Passwords $passwords,
     ){}
 
     public function signIn($email, $password):bool {
         //BLOWFISH 2A
-        $result = $this->database->query(
-            "SELECT * FROM users WHERE email = ? AND password = crypt(?, password)",
-            $email, $password
-        );
-
-        $cnt = $result->getRowCount();
-
-        if ($cnt === 0){
-            return false;
-        }
-        elseif ($cnt === 1){
+        $table = $this->database->table('users');
+        $table->where('email', $email)->select('password');
+        $hashP = $table->fetch();
+        $hashP = $hashP->offsetGet('password'); 
+        if($this->passwords->verify($password, $hashP))
+        {
             return true;
-        }
-        else{
-            //nejaky error sem
-            return false;
-        }
-
+        } else return false;
     }
 
 }
