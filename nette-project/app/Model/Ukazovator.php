@@ -3,7 +3,7 @@
 namespace App\Model;
 
 use Nette;
-use Nette\Database\Table\ActiveRow;
+
 use Nette\Database\Table\Selection;
 
 final class Ukazovator
