@@ -1,13 +1,15 @@
 {block title}View{/block}
 {block content}
-<div class="upmenu">
+<header class="upmenu">
     <ul>
         <li><a n:href="Viewer:default"><img src="{$basePath}/img/jkLogo.png" alt="peroule" width="80" height="60"></a></li>
         <li>HOME</li>
     </ul>
-</div>
-<div class="viewer">
-<div class="menu">
+</header>
+<section class="viewer">
+
+
+<nav class="menu">
     <ul>
         <li><a class="btn-grad" n:href="Sign:in">home</a></li>
         <li><a class="btn-grad" n:href="Viewer:default">Create order</a></li>
@@ -18,15 +20,19 @@
         <li><a class="btn-grad" n:href="Viewer:default">Settings</a></li>
         <li><a class="btn-grad" n:href="Viewer:default">Logout</a></li>
     </ul>
-</div>
+</nav>
 
-<div class="viewStuff">
+<section class="viewStuff">
     <div><h3>USERS</h3>
     {$tableUser}
     </div>
     <div><h3>GROUPS</h3>
     {$tableGroup}
     </div>  
-</div>
-</div>
+</section>
+</section>
+
+<footer>
+Vytvořil Jakub Kurka
+</footer>
 {/block}

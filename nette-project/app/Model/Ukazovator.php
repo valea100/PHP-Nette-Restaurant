@@ -3,7 +3,8 @@
 namespace App\Model;
 
 use Nette;
-
+use Nette\Database\Table\ActiveRow;
+use Nette\Database\Table\Selection;
 
 final class Ukazovator
 {
@@ -15,58 +16,21 @@ final class Ukazovator
     /**
      * @param int $count    Pocet vypsanych radku
      * @param array $params   Nazvy columns ktere chces vykreslit napr. ['id', 'email']
+     * @return Selection    table selection
      */
-    public function showUsers($count = -1, $params = [])
+    public function showTable(string $tableName,$count = -1, $params = []):Selection
     {
-        $result = false;
-        $queryRequest = '';
-        $cnt_par = count($params);
-        
-        if ($cnt_par === 0) {
-            //show all
-            $queryRequest = 'SELECT * FROM users';
-        } else {
-            $queryRequest = 'SELECT';
-            for ($i = 0; $i < $cnt_par; $i++) {
-                $queryRequest = $queryRequest . $params[$i] . ', ';
-            }
-            $queryRequest = substr($queryRequest, 0, -2); //odstranit carku
-            $queryRequest = $queryRequest . ' FROM users';
-        }
-
+        $table = $this->database->table($tableName);
+        $cntPar = count($params);
         if($count !== -1){
-            $queryRequest = $queryRequest . ' limit ' . strval($count);
+            $table->limit($count);
         }
-        $queryRequest = $queryRequest . ';';
-        $result = $this->database->query($queryRequest);
-        return $result;
+        if ($cntPar !== 0){ 
+            $table->select(implode(' ', $params));
+        }
+        return $table;
+
     }
-
-    public function showGroups($count = -1, $params = []){
-        $result = false;
-        $queryRequest = '';
-        $cnt_par = count($params);
-
-        if ($cnt_par === 0) {
-            //show all
-            $queryRequest = 'SELECT * FROM groups';
-        } else {
-            $queryRequest = 'SELECT';
-            for ($i = 0; $i < $cnt_par; $i++) {
-                $queryRequest = $queryRequest . $params[$i] . ', ';
-            }
-            $queryRequest = substr($queryRequest, 0, -2); //odstranit carku
-            $queryRequest = $queryRequest . ' FROM groups';
-        }
-
-        if($count !== -1){
-            $queryRequest = $queryRequest . ' limit ' . strval($count);
-        }
-        $queryRequest = $queryRequest . ';';
-        $result = $this->database->query($queryRequest);
-        return $result;
-    }
-
     public function createGroup($name){
         $result = $this->database->table('groups')->insert([
             'name' => $name,

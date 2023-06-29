@@ -11,6 +11,7 @@ use Nette\Application\UI\Form;
 use Nette\Utils\Html;
 
 use GroupFormFactory;
+use Nette\Database\Table\ActiveRow;
 
 final class ViewerPresenter extends Nette\Application\UI\Presenter
 {
@@ -21,38 +22,37 @@ final class ViewerPresenter extends Nette\Application\UI\Presenter
     ){}
     
     public function renderDefault():void{
-        $idk = $this->ukazovator->showUsers();
-        $this->template->tableUser = $this->createTable($idk, ['ID', 'EMAIL', 'PASSWORD', 'FIRST NAME', 'LAST NAME', 'GROUP ID']);
+        $idk = $this->ukazovator->showTable('users');
+        $this->template->tableUser = $this->createTable($idk, ['id', 'email', 'firstname', 'lastname', 'group_id']);
 
-        $idk = $this->ukazovator->showGroups();
-        $this->template->tableGroup = $this->createTable($idk, ['ID', 'NAME']);
+        $idk = $this->ukazovator->showTable('groups');
+        $this->template->tableGroup = $this->createTable($idk, ['id', 'name']);
     }
 
     public function renderGroups():void{
-        $idk = $this->ukazovator->showGroups();
-        $this->template->tableGroup = $this->createTable($idk, ['ID', 'NAME']);
+        $idk = $this->ukazovator->showTable('groups');
+        $this->template->tableGroup = $this->createTable($idk, ['id', 'name']);
     }
 
-    private function createTable(ResultSet $data, array $description): Html{
-        $colCount = $data->getColumnCount();
-        $rowCount = $data->getRowCount();
+    private function createTable($data, array $description): Html{
+        $rowCount = count($data);
         $desc = '<tr class="viewNadpis">';
 
         foreach ($description as $d) {
             $desc = $desc . '<th> ' . $d . ' </th> ';
         }
 
-        $desc = $desc . '</trc>';
+        $desc = $desc . '</tr>';
         $t = Html::el('table');
         $t[] = $desc;
 
-        $rowD = $data->fetchAll();
         
         $desc = '';
         for ($i=0; $i < $rowCount; $i++) {
             $desc = $desc . '<tr>';
-            for ($z=0; $z < $colCount; $z++) { 
-                $desc = $desc . '<th>' . $rowD[$i][$z] . '</th>';
+            $row = $data->fetch();
+            foreach ($description as $d) { 
+                $desc = $desc . '<th>' . $row->offsetGet($d) . '</th>';
             }
             $desc = $desc . '</tr>'; 
         }
@@ -78,6 +78,9 @@ final class ViewerPresenter extends Nette\Application\UI\Presenter
             $this->redirect('Viewer:groups');
         }
     }
+
+
+    
 
 
 }

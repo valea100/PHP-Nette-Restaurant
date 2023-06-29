@@ -1,10 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Mono:wght@300;400&display=swap');
 body{
-    font-family: 'Bebas Neue', sans-serif;
-    font-family: 'Roboto Mono', monospace;
-    margin: 0%;
-    padding: 0%;
-    background-image: linear-gradient(110deg , #a8edea 0%, #fed6e3 100%);
+   font-family: 'Bebas Neue', sans-serif;
+   font-family: 'Roboto Mono', monospace;
+   margin: 0%;
+   padding: 0%;
+   background-image: linear-gradient(110deg , #a8edea 0%, #fed6e3 100%);
+   height: 100%;
+   width: 100%;
+   min-height: 100vh;
+   position: relative;
 }
 li{
     margin: 0%;
@@ -14,6 +18,17 @@ ul{
     margin: 0%;
     padding: 0%;
     list-style-type: none;
+}
+
+footer{
+   margin: 0%;
+   padding: 0%;
+   text-align: center;
+   background-color: rgba(255, 255, 255, 0.295);
+   position: absolute;
+   bottom: 0%;
+   width: 100%;
+   left: 0%;
 }
 .btn-grad {
     background-image: linear-gradient(to right, #f77584 0%, #72e7e1  51%, #ff6e7f  100%);
@@ -62,7 +77,7 @@ ul{
     /*border: solid black;*/
     margin: 20% 25%;
     padding: 0%;
-    display: block;
+   
  }
  .signInBox form{
     margin: 0% auto;
@@ -123,6 +138,8 @@ ul{
 
 .viewer {
     display: flex;
+    flex-grow: 5;
+    flex-basis: 90%;
 }
 .viewNadpis{
     margin: 0%;

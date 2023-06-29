@@ -7,8 +7,8 @@
         <li>GROUPS</li>
     </ul>
 </div>
-<div class="viewer">
-<div class="menu">
+<section class="viewer">
+<nav class="menu">
     <ul>
         <li><a class="btn-grad" n:href="Sign:in">home</a></li>
         <li><a class="btn-grad" n:href="Viewer:default">Create order</a></li>
@@ -19,16 +19,19 @@
         <li><a class="btn-grad" n:href="Viewer:default">Settings</a></li>
         <li><a class="btn-grad" n:href="Viewer:default">Logout</a></li>
     </ul>
-</div>
+</nav>
 
 <div class="viewStuff">
-<div><h3>CREATE GROUP</h3>
-{control groupForm}
+    <div><h3>CREATE GROUP</h3>
+        {control groupForm}
+    </div>
+    <div><h3>GROUPS</h3>
+        {$tableGroup}
+    </div>
 </div>
-<div><h3>GROUPS</h3>
-{$tableGroup}
-</div>
-</div>
-</div>
+</section>
+<footer>
+Vytvořil Jakub Kurka
+</footer>
 
 {/block}
