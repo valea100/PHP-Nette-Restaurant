@@ -1,0 +1,54 @@
+{block title}Tables{/block}
+{block content}
+<header class="upmenu">
+    <ul>
+        <li><a n:href="Viewer:default"><img src="{$basePath}/img/jkLogo.png" alt="peroule" width="80" height="60"></a></li>
+        <li>TABLES</li>
+    </ul>
+</header>
+<section class="viewer">
+
+
+<nav class="menu">
+    <ul>
+        <li><a class="btn-grad" n:href="Sign:in">home</a></li>
+        <li><a class="btn-grad" n:href="Viewer:default">Create order</a></li>
+        <li><a class="btn-grad" n:href="Table:default">Add table</a></li>
+        <li><a class="btn-grad" n:href="Viewer:default">Add foods</a></li>
+        <li><a class="btn-grad" n:href="Viewer:groups">Manage groups</a></li>
+        <li><a class="btn-grad" n:href="Viewer:default">change prices</a></li>
+        <li><a class="btn-grad" n:href="Viewer:default">Settings</a></li>
+        <li><a class="btn-grad" n:href="Viewer:default">Logout</a></li>
+    </ul>
+</nav>
+
+<section class="viewStuff">
+    <section class="groupControls">
+    <div><h3>ADD TABLE</h3>
+        {control tableForm}
+    </div>
+    <div><h3>DELETE TABLE</h3>
+        {control deleteForm}
+    </div>
+    </section>
+    <div><h3>Tables</h3>
+        <table>
+            <tbody>
+                <tr class="viewNadpis">
+                    <th>id</th>
+                </tr>
+                {foreach $tableTables as $t}
+                <tr>
+                    <th>{$t}</th>
+                </tr>
+                {/foreach}
+            </tbody>
+        </table>
+    </div>
+</section>
+</section>
+
+<footer>
+Vytvořil Jakub Kurka
+</footer>
+{/block}
