@@ -12,4 +12,5 @@ services:
 	- App\Model\Loginator
 	- App\Model\Ukazovator
 	- App\Model\Stolator
-
+	- App\Model\Orderator
+	- App\Model\Jidlator

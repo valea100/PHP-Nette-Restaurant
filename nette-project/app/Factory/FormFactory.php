@@ -15,6 +15,7 @@ class MyFormFactory{
     }
 }
 
+#########################################SIGN IN##############################################
 
 class SignInFormFactory{
     public function __construct(
@@ -30,6 +31,7 @@ class SignInFormFactory{
     }
 
 }
+#########################################REGISTER##############################################
 
 class RegisterFormFactory{
     public function __construct(
@@ -50,6 +52,7 @@ class RegisterFormFactory{
 
 }
 
+#########################################GROUPS##############################################
 class GroupFormFactory{
     public function __construct(
         private MyFormFactory $MyFormFactory,
@@ -83,6 +86,8 @@ class GroupDeleteFormFactory{
     }
 }
 
+#########################################TABLES##############################################
+
 class TableFormFactory{
     public function __construct(
         private MyFormFactory $MyFormFactory,
@@ -111,6 +116,33 @@ class TableDeleteFormFactory{
         $form = $this->MyFormFactory->create();
         $form->addSelect('selected', 'Položky k odstranění', $arrayNames)->getSelectedItem();
         $form->addSubmit('delete', 'delete');
+        return $form;
+    }
+}
+
+#########################################ORDERS##############################################
+
+
+class OrderFormFactory{
+    public function __construct(
+        private MyFormFactory $MyFormFactory,
+    ){}
+
+    public function create(Selection $foodItems, Selection $tables): Form{
+        $tableArray = $tables->fetchAll();
+        $foodArray = $foodItems->fetchAll();
+        $foodNames = [];
+        $tableIds = [];
+        foreach ($foodArray as $d) {
+            array_push($foodNames, $d->offsetGet('name'));
+        }
+        foreach($tableArray as $d) {
+            array_push($tableIds, $d->offsetGet('id'));
+        }
+        $form = $this->MyFormFactory->create();
+        $form->addSelect('selectedFood', 'vybrane jidlo', $foodNames)->getSelectedItem();
+        $form->addSelect('selectedTable', 'stul', $tableIds)->getSelectedItem();
+        $form->addSubmit('send', 'Create');
         return $form;
     }
 }

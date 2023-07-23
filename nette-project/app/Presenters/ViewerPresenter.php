@@ -30,13 +30,6 @@ final class ViewerPresenter extends HomePresenter
         $this->groupDeleteFormFactory = $groupDeleteFormFactory;
         $this->tableFactory = $tableFactory;
     }
-    /*public function __construct(
-        private Ukazovator $ukazovator,
-        private Nette\Database\Explorer $db,
-        private GroupFormFactory $groupFormFactory,
-        private GroupDeleteFormFactory $groupDeleteFormFactory,
-        private TableFactory $tableFactory,
-    ){}*/
     
     public function startup(){
         parent::startup();

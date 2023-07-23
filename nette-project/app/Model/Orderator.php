@@ -5,25 +5,37 @@ namespace App\Model;
 use Nette;
 
 use Nette\Database\Table\Selection;
+use Nette\Security\User;
 
-final class Stolator
+final class Orderator
 {
     public function __construct(
         private Nette\Database\Explorer $database,
+        private User $user,
     ) {
-        $this->table = $this->database->table("resttables");
+        $this->table = $this->database->table("orders");
     }
 
     /**
      * @return array all table id
      */
-    public function showAllTables():array
+    public function showAllOrders():array
     {
         $result = [];
         foreach ($this->table as $item) {
             array_push($result, $item->id);
         }
         return $result;
+    }
+
+    public function createOrder($food, $status, $about, $stul, $userId):bool{
+        $this->table->insert([
+            'food_id' => $food,
+            'status' => $status,
+            'about' => $about,
+            'user_id' => $userId,
+        ]);
+        return true;
     }
 
     public function addTable():bool{

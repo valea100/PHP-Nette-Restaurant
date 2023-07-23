@@ -3,7 +3,7 @@
 <header class="upmenu">
     <ul>
         <li><a n:href="Viewer:default"><img src="{$basePath}/img/jkLogo.png" alt="peroule" width="80" height="60"></a></li>
-        <li>TABLES</li>
+        <li>ORDERS</li>
     </ul>
 </header>
 <section class="viewer">
@@ -24,28 +24,14 @@
 
 <section class="viewStuff">
     <section class="groupControls">
-    <div><h3>ADD TABLE</h3>
-        {control tableForm}
+    <div><h3>CREATE ORDER</h3>
+        {control orderForm}
     </div>
-    <div><h3>DELETE TABLE</h3>
+    <div><h3>CHANGE ORDER</h3>
         {control deleteForm}
     </div>
     </section>
-    <div><h3>Tables</h3>
-        <table>
-            <tbody>
-                <tr class="viewNadpis">
-                    <th>id</th>
-                    <th>Order</th>
-                </tr>
-                {foreach $tableTables as $index => $val}
-                <tr>
-                    <th>{$tableTables[$index]}</th>
-                    <th>{$orderFood[$index]}</th>
-                </tr>
-                {/foreach}
-            </tbody>
-        </table>
+    <div><h3>Orders</h3>
     </div>
 </section>
 </section>

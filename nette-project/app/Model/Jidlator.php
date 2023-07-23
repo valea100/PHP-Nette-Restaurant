@@ -6,18 +6,18 @@ use Nette;
 
 use Nette\Database\Table\Selection;
 
-final class Stolator
+final class Jidlator
 {
     public function __construct(
         private Nette\Database\Explorer $database,
     ) {
-        $this->table = $this->database->table("resttables");
+        $this->table = $this->database->table("foods");
     }
 
     /**
      * @return array all table id
      */
-    public function showAllTables():array
+    public function showAllfoods():array
     {
         $result = [];
         foreach ($this->table as $item) {
@@ -26,18 +26,10 @@ final class Stolator
         return $result;
     }
 
-    public function addTable():bool{
-        $this->table->insert([
-            'ordersid' => -1,   //-1 => no order
-            'isused' => 0,
-        ]);
-        return true;
+    public function getFoodId($foodName){
+        $result = $this->table->where('name', $foodName)->fetch();
+        return $result->id;
     }
-    public function delTable($id){
-        $result = $this->table->where('id', $id)->delete();
-        return $result;
-    }
-
     /**
      * @param $id Id of table to show order
      * @return table order
