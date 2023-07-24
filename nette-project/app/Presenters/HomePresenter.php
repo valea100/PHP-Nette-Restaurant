@@ -6,6 +6,7 @@ namespace App\Presenters;
 
 use Nette;
 
+#TRIDA POUZE PRO ZJISTENI, JESTLI JE UZIVATEL PRIHLASEN..... ODSUD DEDI VSECHNY PRESENTERY (KROME SIGN A REGISTER PRESENTERU)
 
 class HomePresenter extends Nette\Application\UI\Presenter
 {

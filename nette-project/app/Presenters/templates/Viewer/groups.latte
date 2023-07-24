@@ -1,42 +1,22 @@
 {block title}Groups{/block}
-
+{block name}GROUPS{/block}
 {block content}
-<div class="upmenu">
-    <ul>
-        <li><a n:href="Viewer:default"><img src="{$basePath}/img/jkLogo.png" alt="peroule" width="80" height="60"></a></li>
-        <li>GROUPS</li>
-    </ul>
-</div>
-<section class="viewer">
-<nav class="menu">
-    <ul>
-        <li><a class="btn-grad" n:href="Sign:in">home</a></li>
-        <li><a class="btn-grad" n:href="Viewer:default">Create order</a></li>
-        <li><a class="btn-grad" n:href="Table:default">Add table</a></li>
-        <li><a class="btn-grad" n:href="Viewer:default">Add foods</a></li>
-        <li><a class="btn-grad" n:href="Viewer:groups">Manage groups</a></li>
-        <li><a class="btn-grad" n:href="Viewer:default">change prices</a></li>
-        <li><a class="btn-grad" n:href="Viewer:default">Settings</a></li>
-        <li><a class="btn-grad" n:href="Viewer:default">Logout</a></li>
-    </ul>
-</nav>
-
 <section class="viewStuff">
     <section class="groupControls">
-    <div><h3>CREATE GROUP</h3>
-        {control groupForm}
-    </div>
-    <div><h3>DELETE GROUPS</h3>
-        {control groupDelForm}
-    </div>
+        <div><h3>CREATE GROUP</h3>
+            {control groupForm}
+        </div>
+        <div><h3>DELETE GROUPS</h3>
+            {control groupDelForm}
+        </div>
     </section>
-    <div><h3>GROUPS</h3>
-        {$tableGroup}
-    </div>
+        <div><h3>GROUPS</h3>
+            {$tableGroup}
+        </div>
 </section>
-</section>
+{/block}
+{block footer}
 <footer>
-Vytvořil Jakub Kurka
+    Vytvořil Jakub Kurka
 </footer>
-
 {/block}

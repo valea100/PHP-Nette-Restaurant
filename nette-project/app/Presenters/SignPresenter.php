@@ -28,6 +28,14 @@ final class SignPresenter extends Nette\Application\UI\Presenter
         private Loginator $loginator,
         private SignInFormFactory $signInFormFactory,
     ){}*/
+
+    public function startup():void{
+        parent::startup();
+        $this->setLayout('layout-sign');
+        if($this->getUser()->isLoggedIn() === true){
+            $this->redirect('Viewer:default');
+        }
+    }
     
     protected function createComponentSignInForm(): Form{
         $form = $this->signInFormFactory->create();

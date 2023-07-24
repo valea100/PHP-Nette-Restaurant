@@ -33,10 +33,7 @@ final class ViewerPresenter extends HomePresenter
     
     public function startup(){
         parent::startup();
-
-        if($this->getUser()->isLoggedIn() === false){
-            $this->redirect('Sign:in');
-        }
+        $this->setLayout('layout');
     }
 
     public function renderDefault():void{

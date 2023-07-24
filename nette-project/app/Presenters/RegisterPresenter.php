@@ -10,7 +10,7 @@ use Nette\Application\UI\Form;
 use App\Model\Registrator;
 use RegisterFormFactory;
 
-final class RegisterPresenter extends HomePresenter
+final class RegisterPresenter extends Nette\Application\UI\Presenter
 {
     private Registrator $registrator;
     private RegisterFormFactory $registerFormFactory;
@@ -26,6 +26,15 @@ final class RegisterPresenter extends HomePresenter
         private Registrator $registrator,
         private RegisterFormFactory $registerFormFactory,
     ){}*/
+
+    public function startup():void{
+        parent::startup();
+        $this->setLayout('layout-sign');
+        if($this->getUser()->isLoggedIn() === true){
+            $this->redirect('Viewer:default');
+        }
+    }
+    
     protected function createComponentRegisterForm(): Form{
         $form = $this->registerFormFactory->create();
         $form->onSuccess[] = [$this, 'formSucceeded'];
@@ -40,7 +49,7 @@ final class RegisterPresenter extends HomePresenter
         }
         else{
             $this->registrator->createUser($data->email, $data->password, $data->firstname, $data->lastname, $data->group_id);
-            $this->redirect('Viewer:default');
+            $this->redirect('Sign:in');
         }
     }
 
