@@ -80,10 +80,7 @@ final class ViewerPresenter extends HomePresenter
         $this->redirect('Viewer:groups');
     }
     
-    public function actionSignOut(){
-        $this->getUser()->logout();
-        $this->redirect('Sign:in');
-    }
+    
 
 
 }

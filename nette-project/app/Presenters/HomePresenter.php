@@ -18,5 +18,9 @@ class HomePresenter extends Nette\Application\UI\Presenter
             $this->redirect('Sign:in');
         }
     }
+    public function actionSignOut(){
+        $this->getUser()->logout();
+        $this->redirect('Sign:in');
+    }
 
 }

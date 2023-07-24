@@ -28,7 +28,6 @@ final class Stolator
 
     public function addTable():bool{
         $this->table->insert([
-            'ordersid' => -1,   //-1 => no order
             'isused' => 0,
         ]);
         return true;
@@ -60,7 +59,9 @@ final class Stolator
         $result = [];
         foreach($this->table as $item) {
             $order = $this->showTableOrder($item->id);
-            array_push($result, $this->showFood($order->food_id));   
+            if (!isset($order->food_id)) {
+                array_push($result, $this->showFood(-1));
+            }else array_push($result, $this->showFood($order->food_id));   
         }
         return $result;
     }

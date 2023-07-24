@@ -10,9 +10,6 @@ use App\Model\Stolator;
 use App\Model\Orderator;
 use App\Model\Jidlator;
 use Nette\Application\UI\Form;
-use Nette\ComponentModel\IComponent;
-use GroupDeleteFormFactory;
-use GroupFormFactory;
 use TableDeleteFormFactory;
 use OrderFormFactory;
 
