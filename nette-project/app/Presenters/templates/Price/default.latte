@@ -1,0 +1,30 @@
+{block title}Price{/block}
+{block name}PRICE{/block}
+{block content}
+    <section class="viewStuff">
+        <div class="form-box">
+        <h3>CHANGE PRICE</h3>
+        {form priceForm}
+            <div class="form-group">
+                {input selectedFood, class => "form-control"}
+                <label for="frm-priceForm-selectedFood" class="form-label">Vybrané jídlo</label>
+            </div>
+            
+            <div class="form-group">
+                {input price, class => "form-control"}
+                <label for="frm-priceForm-price" class="form-label">Cena</label>
+            </div>
+
+            <div class="form-group">
+                {input send, class => "form-send-alter"}
+            </div>
+        {/form}
+        </div>
+        <h3>prices</h3>
+    </section>
+{/block}
+{block footer}
+<footer>
+    Vytvořil Jakub Kurka
+</footer>
+{/block}

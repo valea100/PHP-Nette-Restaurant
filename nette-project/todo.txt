@@ -1,0 +1,6 @@
+TODO:
+	- Předělat css - HOTOVO
+	- flexbox griddy s jidly (jmeno jidla, kvantita a obrazek) - HOTOVO
+	- Zobrazit obrázky k jídlům - HOTOVO
+	- hodit template listu obrazku - HOTOVO
+	- Zeptat se co dál udělat

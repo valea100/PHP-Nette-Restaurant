@@ -147,3 +147,45 @@ class OrderFormFactory{
     }
 }
 
+#########################################FOOD##############################################
+
+
+
+class FoodFormFactory{
+    public function __construct(
+        private MyFormFactory $MyFormFactory,
+    ){}
+
+    public function create(): Form{
+        $form = $this->MyFormFactory->create();
+        $form->addText('name', 'Název pokrmu')->setRequired(true);
+        $form->addInteger('quantity', 'Počet jídla')->setRequired(true);
+        $form->addInteger('price', 'cena')->setRequired(true);
+        $form->addUpload('image', 'Obrázek jídla')->addRule(Form::Image, 'Image must be JPEG, PNG or BMP')->addRule(Form::MaxFileSize, 'Max size of file is 2 MB', 2 * 1024 * 1024);
+        $form->addSubmit('send', 'Create');
+        return $form;
+    }
+}
+
+
+#########################################PRICES##############################################
+
+
+class PriceFormFactory{
+    public function __construct(
+        private MyFormFactory $MyFormFactory,
+    ){}
+
+    public function create(Selection $foodItems): Form{
+        $foodArray = $foodItems->fetchAll();
+        $foodNames = [];
+        foreach ($foodArray as $d) {
+            array_push($foodNames, $d->offsetGet('name'));
+        }
+        $form = $this->MyFormFactory->create();
+        $form->addSelect('selectedFood', 'vybrane jidlo', $foodNames)->getSelectedItem();
+        $form->addInteger('price', 'cena')->setRequired(true);
+        $form->addSubmit('send', 'CHANGE');
+        return $form;
+    }
+}

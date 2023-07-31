@@ -60,7 +60,7 @@ final class Stolator
         foreach($this->table as $item) {
             $order = $this->showTableOrder($item->id);
             if (!isset($order->food_id)) {
-                array_push($result, $this->showFood(-1));
+                array_push($result, 'None');
             }else array_push($result, $this->showFood($order->food_id));   
         }
         return $result;

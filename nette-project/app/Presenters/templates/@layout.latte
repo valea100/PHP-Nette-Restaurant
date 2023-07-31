@@ -6,6 +6,7 @@
 
 	<title>{ifset title}{include title|stripHtml} | {/ifset}restaurace</title>
 	<link rel="stylesheet" href="{$basePath}/css/style.css">
+	<link rel="stylesheet" href="{$basePath}/css/formStyle.css">
 </head>
 
 <body>
@@ -23,9 +24,9 @@
         	<li><a class="btn-grad" n:href="Viewer:default">home</a></li>
     	    <li><a class="btn-grad" n:href="Order:default">Create order</a></li>
         	<li><a class="btn-grad" n:href="Table:default">Add table</a></li>
-	        <li><a class="btn-grad" n:href="Viewer:default">Add foods</a></li>
+	        <li><a class="btn-grad" n:href="Food:default">Add foods</a></li>
     	    <li><a class="btn-grad" n:href="Viewer:groups">Manage groups</a></li>
-	        <li><a class="btn-grad" n:href="Viewer:default">change prices</a></li>
+	        <li><a class="btn-grad" n:href="Price:default">change prices</a></li>
     	    <li><a class="btn-grad" n:href="Viewer:default">Settings</a></li>
         	<li><a class="btn-grad" n:href="signOut">Logout</a></li>
     	</ul>

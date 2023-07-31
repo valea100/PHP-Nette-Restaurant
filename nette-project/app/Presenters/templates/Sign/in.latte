@@ -2,12 +2,25 @@
 {block title}Sign in{/block}
 {block content}
 
-<div class="signInBox">
-{control signInForm}
 
-<a class="btn-grad" n:href="Register:register">register</a>
+<div class="signInBox">
+<h3>LOGIN</h3>
+{form signInForm}
+	<div class="form-group">
+	{input email, class => "form-control", placeholder => "E-Mail"}
+	<label for="frm-signInForm-email" class="form-label">Email Address</label>
+	</div>
+	<div class="form-group">
+	{input password, class => "form-control", placeholder => "Password"}
+	<label for="frm-signInForm-password" class="form-label">Password</label>
+	</div>
+	{input send, class => "form-send", placeholder => "signIn"}
+	<a class="form-reg" n:href="Register:register">Registrovat se</a>
+{/form}
 </div>
 <footer>
 Vytvořil Jakub Kurka
 </footer>
+
+
 {/block}

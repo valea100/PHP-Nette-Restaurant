@@ -12,19 +12,20 @@ final class Jidlator
         private Nette\Database\Explorer $database,
     ) {
         $this->table = $this->database->table("foods");
+        $this->prices = $this->database->table("price_list");
     }
 
     /**
      * @return array all table id
      */
-    public function showAllfoods():array
+    /*public function showAllfoods():array
     {
         $result = [];
         foreach ($this->table as $item) {
             array_push($result, $item->id);
         }
         return $result;
-    }
+    }**/
 
     public function getFoodId($foodName){
         $result = $this->table->where('name', $foodName)->fetch();
@@ -47,6 +48,11 @@ final class Jidlator
         return $result;
     }
 
+    public function showAllfoods(){
+        $result = $this->table->fetchAll();
+        return $result;
+    }
+
     public function showAllTableOrders(){
         $tableArray = $this->showAllTables();
         $result = [];
@@ -56,4 +62,29 @@ final class Jidlator
         }
         return $result;
     }
+
+    public function insertFood($name, $quantity):void{
+        if(is_string($name) && is_int($quantity)){
+            $this->table->insert([
+                'name' => $name,
+                'quantity' => $quantity,
+            ]);
+        }
+    }
+
+    public function addPrice($foodID, $price):void{
+        if(is_int($price) && is_int($foodID)){
+            $this->prices->insert([
+                'food_id' => $foodID,
+                'price' => $price,
+            ]);
+        }
+    }
+
+
+
+
+
+
+
 }

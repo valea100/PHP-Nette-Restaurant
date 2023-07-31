@@ -61,11 +61,7 @@ final class Orderator
         return $result;
     }
 
-    public function showFood($id){
-        $foodTable = $this->database->table("foods");
-        $result = $foodTable->get($id)->name;
-        return $result;
-    }
+
 
     public function showAllTableOrders(){
         $tableArray = $this->showAllTables();

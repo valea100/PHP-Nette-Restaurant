@@ -1,0 +1,52 @@
+{block title}Food{/block}
+{block name}FOOD{/block}
+{block content}
+    <section class="viewStuff">
+        <div class="form-box">
+        <h3>Add food</h3>
+        <div class="form-box-flex">
+        {form foodForm}
+            <div class="form-group">
+                {input name, class => "form-control"}
+                <label for="" class="form-label">Food name</label>
+            </div>
+            <div class="form-group">
+                {input quantity, class => "form-control"}
+                <label for="" class="form-label">Quantity</label>
+            </div>
+            <div class="form-group">
+                {input price, class => "form-control"}
+                <label for="" class="form-label">Price</label>
+            </div>
+
+            <label class="custom-file-upload">
+                {input image, class => "form-control"}
+                Upload Image
+            </label>
+            </div>
+            <div class="form-group">
+                {input send, class => "form-send-alter"}
+            </div>
+        {/form}
+
+        </div>
+        <h3>Foods</h3>
+        <div class="foodsContainer">
+        {foreach $foods as $food}
+            <div class="foodsFlexItem">
+            <h3>{$food->name}</h3>
+            <section>
+                <p>Quantity: {$food->quantity}</p>
+                <p>Price: {$prices[$food->id]->price}</p>
+            </section>
+            <img src='/{$images[$food->id]}' alt="foodImage" class="foodImage">
+            </div>
+        {/foreach}
+        </div>  
+    </section>
+{/block}
+{block footer}
+<footer>
+    Vytvořil Jakub Kurka
+</footer>
+{/block}

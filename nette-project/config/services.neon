@@ -14,3 +14,5 @@ services:
 	- App\Model\Stolator
 	- App\Model\Orderator
 	- App\Model\Jidlator
+	- App\Model\Imaginator
+	- App\Model\Cenator

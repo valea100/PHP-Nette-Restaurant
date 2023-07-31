@@ -5,10 +5,14 @@
 	<meta name="viewport" content="width=device-width">
 
 	<title>{ifset title}{include title|stripHtml} | {/ifset}restaurace</title>
-	<link rel="stylesheet" href="{$basePath}/css/style.css">
+	<link rel="stylesheet" href="{$basePath}/css/SignInStyle.css">
+	<link rel="stylesheet" href="{$basePath}/css/formStyle.css">
 </head>
 
 <body>
+	<header>
+		<img src="{$basePath}/img/jkLogo.png" alt="peroule" width="80" height="60">
+	</header>
 	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
 	{include content}
 

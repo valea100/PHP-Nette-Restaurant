@@ -4,7 +4,7 @@ body{
    font-family: 'Roboto Mono', monospace;
    margin: 0%;
    padding: 0%;
-   background-image: linear-gradient(110deg , #a8edea 0%, #fed6e3 100%);
+   background-color: rgba(232, 236, 241, 1.0);
    height: 100%;
    width: 100%;
    min-height: 100vh;
@@ -31,7 +31,7 @@ footer{
    left: 0%;
 }
 .btn-grad {
-    background-image: linear-gradient(to right, #f77584 0%, #72e7e1  51%, #ff6e7f  100%);
+    background-color: rgba(149, 165, 166, 1.0);
     font-family: 'Roboto Mono', monospace;
     margin: 10px;
     padding: 15px 45px;
@@ -47,9 +47,9 @@ footer{
   }
 
   .btn-grad:hover {
-    background-position: right center; /* change the direction of the change here */
     color: black;
     text-decoration: none;
+    transform:scale(1.05,1.05);
   }
  .menu {
     display: inline-block;
@@ -200,7 +200,7 @@ footer{
 }
 .groupControls input[type=submit] {
    justify-content: center;
-   background-image: linear-gradient(to right, #f77584e8 0%, #72e7e1da  51%, #ff6e7fe0  100%);
+   background-color: rgba(149, 165, 166, 1.0);
    font-family: 'Roboto Mono', monospace;
    border: none;
    color: white;
@@ -218,10 +218,10 @@ footer{
 }
 
 .groupControls input[type=submit]:hover {
-   background-position: right center; /* change the direction of the change here */
    color: black;
    text-decoration: none;
    cursor: pointer;
+   transform:scale(1.05,1.05);
 }
 
 .groupControls select{
@@ -234,3 +234,26 @@ footer{
    box-shadow: 0 0 5px #3d3d3d49;
    width: 90%;
 }
+
+.foodsContainer {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-evenly;
+   align-content: flex-start;
+   row-gap: 10px;
+   column-gap: 10px;
+}
+
+.foodsFlexItem {
+   padding: 20px;
+   margin: 10px;
+   background-color: rgba(255, 255, 255, .295);
+   box-shadow: 0 0 5px #3d3d3d49;
+   border-radius: 10px;
+}
+.foodImage {
+   width: 220px;
+   height: 180px;
+   border-radius: 5px;
+}
+

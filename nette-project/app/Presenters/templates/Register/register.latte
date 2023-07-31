@@ -1,7 +1,40 @@
 {block title}register{/block}
 {block content}
 <div class="signInBox">
-	{control registerForm}
-	<a n:href="Sign:in" class="btn-grad">back to login</a>
+	<h3>REGISTER</h3>
+	{form registerForm}
+	<div class="form-group">
+		{input firstname, class => "form-control", placeholder => "First name"}
+		<label for="frm-registerForm-email" class="form-label">first name</label>
+	</div>
+
+	<div class="form-group">
+		{input lastname, class => "form-control", placeholder => "Last name"}
+		<label for="" class="form-label">Last name</label>
+	</div>
+
+	<div class="form-group">
+		{input email, class => "form-control", placeholder => "Email"}
+		<label for="" class="form-label">Email</label>
+	</div>
+
+	<div class="form-group">
+		{input password, class => "form-control", placeholder => "Password"}
+		<label for="" class="form-label">Password</label>
+	</div>
+
+	<div class="form-group">
+		{input password2, class => "form-control", placeholder => "Password again"}
+		<label for="" class="form-label">Password again</label>
+	</div>
+
+	<div class="form-group">
+		{input group_id, class => "form-control", placeholder => "Group ID"}
+		<label for="" class="form-label">Group ID</label>
+	</div>
+
+	{input send, class => "form-send", placeholder => "signIn"}
+	<a n:href="Sign:in" class="form-reg">back to login</a>
+	{/form}
 </div>
 {/block}
