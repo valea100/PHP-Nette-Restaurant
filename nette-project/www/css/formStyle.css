@@ -17,6 +17,7 @@ input[type=number] {
 	margin-top: 5%;
 	border-radius: 10px;
 	box-shadow: 5px 5px 30px rgba(0,0,0,0.35);
+	background-color: rgba(149, 165, 166, 1.0);
 }
 
 .viewStuff .form-box{
@@ -57,7 +58,7 @@ input[type=number] {
 	border-radius: 0px;
 	border-color:#ccc;
 	border-style: none none solid none;
-	width: 80%;
+	width: 100%;
 	transition:all .5s;
 	padding:5px;
 	border-radius: 3px;
@@ -105,7 +106,7 @@ input[type=number] {
 	font-family: 'Roboto Mono', monospace;
 	font-size: 1em;
 	font-weight: bold;
-	background-color: rgba(149, 165, 166, 1.0);
+	background-color: rgba(255, 255, 255, .35);
 	border: none;
 	color: black;
 	padding: 8px 16px;
@@ -136,7 +137,7 @@ input[type=number] {
 	font-family: 'Roboto Mono', monospace;
 	font-size: .8em;
 	font-weight: bold;
-	background-color: rgba(149, 165, 166, 1.0);
+	background-color: rgba(255, 255, 255, .35);
 	border: none;
 	color: black;
 	padding: 8px 16px;
@@ -152,4 +153,40 @@ input[type=number] {
 
 input[type="file"] {
     display: none;
+}
+
+.form-box-flex .form-control {
+	width: 80%;
+}
+
+
+.Orders-flex{
+	position: fixed;
+	left: 0%;
+	right: 0%;
+	top: 0%;
+	width: 20%;
+	margin: auto;
+	padding: 20px;
+	margin-top: 5%;
+	border-radius: 10px;
+	box-shadow: 5px 5px 30px rgba(0,0,0,0.35);
+	background-color: rgba(149, 165, 166, 1.0);
+	z-index: 9;
+	align-self: center;
+	right: 20%;
+	left: 40%;
+	transition: visibility 400ms linear 0s, opacity 300ms;
+	visibility: hidden;
+  opacity: 0;
+}
+
+.hidden{
+	visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s linear 300ms, opacity 300ms;
+}
+.shown{
+	visibility: visible;
+  opacity: 1;
 }

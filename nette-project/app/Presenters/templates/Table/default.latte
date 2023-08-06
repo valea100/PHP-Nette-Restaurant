@@ -11,16 +11,17 @@
     </div>
     </section>
     <div><h3>Tables</h3>
-        <table>
+        <table style="width: 30%;">
             <tbody>
                 <tr class="viewNadpis">
-                    <th>id</th>
-                    <th>Order</th>
+                    <th>Table ID</th>
+                    <th>Number of orders</th>
                 </tr>
-                {foreach $tableTables as $index => $val}
+                {foreach $orderFood as $index => $val}
                 <tr>
-                    <th>{$tableTables[$index]}</th>
-                    <th>{$orderFood[$index]}</th>
+
+                    <th>{$index}</th>
+                    <th>{$val}</th>
                 </tr>
                 {/foreach}
             </tbody>

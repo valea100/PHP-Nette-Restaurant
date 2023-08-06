@@ -14,14 +14,12 @@ final class Stolator
         $this->table = $this->database->table("resttables");
     }
 
-    /**
-     * @return array all table id
-     */
-    public function showAllTables():array
-    {
-        $result = [];
-        foreach ($this->table as $item) {
-            array_push($result, $item->id);
+    public function showTablesByOrder():array{
+        $result = array();
+        $orders = $this->database->table("orders");
+        foreach($orders as $order){
+            $orderID = $order->id;
+            $result += [$orderID => $order->table_id];
         }
         return $result;
     }
@@ -37,6 +35,11 @@ final class Stolator
         return $result;
     }
 
+    public function delOrderInTable($orderID):void{
+        $result = $this->database->table("resttables")->where('ordersid', $orderID)->update([
+            'ordersid' => null
+        ]);
+    }
     /**
      * @param $id Id of table to show order
      * @return table order
@@ -55,14 +58,24 @@ final class Stolator
     }
 
     public function showAllTableOrders(){
-        $tableArray = $this->showAllTables();
-        $result = [];
-        foreach($this->table as $item) {
-            $order = $this->showTableOrder($item->id);
-            if (!isset($order->food_id)) {
-                array_push($result, 'None');
-            }else array_push($result, $this->showFood($order->food_id));   
+        $tables = $this->database->table("resttables");
+        $result = array();
+        foreach($tables as $table) {
+            $order = $this->database->table("orders")->where('table_id', $table->id);
+            $result += [$table->id => count($order)]; 
         }
         return $result;
+    }
+
+    public function addOrderToTable($tableID, $orderID):void{
+        $t = $this->database->table("resttables")->where('id', $tableID);
+        $t->update([
+            'ordersid' => $orderID,
+        ]);
+    }
+
+    public function showAllTables(){
+        $tables = $this->database->table("resttables")->select('id');
+        return $tables->fetchAll();
     }
 }

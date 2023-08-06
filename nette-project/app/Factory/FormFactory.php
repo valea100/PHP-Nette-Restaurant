@@ -36,16 +36,18 @@ class SignInFormFactory{
 class RegisterFormFactory{
     public function __construct(
         private MyFormFactory $MyFormFactory,
+        private Nette\Database\Explorer $database,
     ){}
     
     public function create(): Form{
+        $groups = $this->database->table('groups')->fetchPairs('id', 'name');
         $form = $this->MyFormFactory->create();
         $form->addText('firstname', 'Jméno')->setRequired();
         $form->addText('lastname', 'Příjmení')->setRequired();
         $form->addText('email', 'email')->setRequired();
         $form->addPassword('password', 'password')->setRequired();
         $form->addPassword('password2', 'password again')->setRequired();
-        $form->addInteger('group_id', 'grupa');
+        $form->addSelect('group_id', 'grupa', $groups)->setRequired();
         $form->addSubmit('send', 'send');
         return $form;
     }
@@ -108,13 +110,14 @@ class TableDeleteFormFactory{
     
 
     public function create(Selection $items): Form{
-        $array = $items->fetchAll();
-        $arrayNames = [];
-        foreach ($array as $d) {
-            array_push($arrayNames, $d->offsetGet('id'));
+        $tableArray = $items->fetchAll();
+        $arrayNames = array();
+        foreach ($tableArray as $d) {
+            $arrayNames += [$d->id => $d->id];
         }
         $form = $this->MyFormFactory->create();
         $form->addSelect('selected', 'Položky k odstranění', $arrayNames)->getSelectedItem();
+        $form->addInteger('selectedOrder', 'order ID');
         $form->addSubmit('delete', 'delete');
         return $form;
     }
@@ -128,25 +131,42 @@ class OrderFormFactory{
         private MyFormFactory $MyFormFactory,
     ){}
 
-    public function create(Selection $foodItems, Selection $tables): Form{
-        $tableArray = $tables->fetchAll();
-        $foodArray = $foodItems->fetchAll();
-        $foodNames = [];
-        $tableIds = [];
-        foreach ($foodArray as $d) {
-            array_push($foodNames, $d->offsetGet('name'));
-        }
-        foreach($tableArray as $d) {
-            array_push($tableIds, $d->offsetGet('id'));
-        }
+    public function create(): Form{
         $form = $this->MyFormFactory->create();
-        $form->addSelect('selectedFood', 'vybrane jidlo', $foodNames)->getSelectedItem();
-        $form->addSelect('selectedTable', 'stul', $tableIds)->getSelectedItem();
+        $form->addSelect('selectedFood', 'vybrane jidlo')->getSelectedItem();
+        $form->addSelect('selectedTable', 'stul')->getSelectedItem();
         $form->addSubmit('send', 'Create');
         return $form;
     }
 }
 
+class OrderDeleteFormFactory{
+    public function __construct(
+        private MyFormFactory $MyFormFactory,
+    ){}
+
+    public function create(): Form{
+        $form = $this->MyFormFactory->create();
+        $form->addSelect('selectedOrder', 'objednavka')->getSelectedItem();
+        $form->addSubmit('delete', 'Create');
+        return $form;
+    }
+}
+
+class OrderChangeFormFactory{
+    public function __construct(
+        private MyFormFactory $MyFormFactory,
+    ){}
+
+    public function create(): Form{
+        $status = ['pending', 'delivered', 'paid', 'closed'];
+        $form = $this->MyFormFactory->create();
+        $form->addSelect('selectedOrder', 'objednavka')->getSelectedItem();
+        $form->addSelect('selectedStatus', 'status', $status)->getSelectedItem();
+        $form->addSubmit('change', 'Change');
+        return $form;
+    }
+}
 #########################################FOOD##############################################
 
 
@@ -165,7 +185,14 @@ class FoodFormFactory{
         $form->addSubmit('send', 'Create');
         return $form;
     }
+
+    public function createDelete(): Form{
+        $form = $this->MyFormFactory->create();
+        $form->addSubmit('send', 'Create');
+        return $form;
+    }
 }
+
 
 
 #########################################PRICES##############################################
@@ -176,14 +203,9 @@ class PriceFormFactory{
         private MyFormFactory $MyFormFactory,
     ){}
 
-    public function create(Selection $foodItems): Form{
-        $foodArray = $foodItems->fetchAll();
-        $foodNames = [];
-        foreach ($foodArray as $d) {
-            array_push($foodNames, $d->offsetGet('name'));
-        }
+    public function create(): Form{
         $form = $this->MyFormFactory->create();
-        $form->addSelect('selectedFood', 'vybrane jidlo', $foodNames)->getSelectedItem();
+        $form->addSelect('selectedFood', 'vybrane jidlo');
         $form->addInteger('price', 'cena')->setRequired(true);
         $form->addSubmit('send', 'CHANGE');
         return $form;

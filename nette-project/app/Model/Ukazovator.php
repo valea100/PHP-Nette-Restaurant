@@ -27,6 +27,7 @@ final class Ukazovator
         }
         if ($cntPar !== 0){ 
             $table->select(implode(' ', $params));
+            echo gey;
         }
         return $table;
 

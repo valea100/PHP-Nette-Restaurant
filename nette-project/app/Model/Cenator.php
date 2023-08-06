@@ -23,6 +23,10 @@ final class Cenator
         }
     }
 
+    public function deletePrice($foodID):void{
+        $result = $this->database->table('price_list')->where('food_id', $foodID)->delete();
+    }
+
     public function showPrice(int $foodID){
         $table = $this->database->table("price_list");
         $result = $table->where('food_id', $foodID)->fetch();
@@ -38,6 +42,21 @@ final class Cenator
         }
         return $result;
     }
+
+    /**
+    * @return array, kde klic je jmeno jidla a cena je hodnota
+    **/
+    public function showFoodsAndPrices(){
+        $priceTable = $this->database->table("price_list");
+        $result = array();
+        foreach($priceTable as $id => $row){
+            $foodName = $row->ref('foods', 'food_id')->name;
+            $result += [$foodName => $row->price];
+        }
+        return $result;
+    }
+
+
 
     public function changePrice(int $foodID, int $newPrice):void {
         $this->prices->where('food_id', $foodID)->update([

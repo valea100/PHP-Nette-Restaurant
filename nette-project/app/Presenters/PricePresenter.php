@@ -30,22 +30,23 @@ final class PricePresenter extends HomePresenter
     }
 
     public function renderDefault():void{
-        $foods = $this->jidlator->showAllfoods();
+        /*$foods = $this->jidlator->showAllfoods();
         $prices = $this->cenator->showAllPrices($foods);
         $this->template->foods = $foods;
-        $this->template->prices = $prices;
+        $this->template->prices = $prices;*/
+        $this->template->dataArr = $this->cenator->showFoodsAndPrices();
 
     }
 
     public function createComponentPriceForm(): Form{
-        $foodss = $this->ukazovator->showTable('foods');
-        $form = $this->priceFormFactory->create($foodss);
+        $form = $this->priceFormFactory->create();
         $form->onSuccess[] = [$this, 'priceSuccess'];
         return $form;
     }
 
     public function priceSuccess($form, $data){
-        $foodID = $this->jidlator->getFoodId($form['selectedFood']->getSelectedItem());
+        $foodName = $form->getHttpData($form::DataText, 'selectedFood');
+        $foodID = $this->jidlator->getFoodId($foodName);
         $this->cenator->changePrice($foodID, $data->price);
         $this->redirect("Price:default");
     }

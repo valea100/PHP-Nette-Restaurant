@@ -21,33 +21,34 @@ final class Orderator
      */
     public function showAllOrders():array
     {
-        $result = [];
-        foreach ($this->table as $item) {
-            array_push($result, $item->id);
-        }
-        return $result;
+        $orders = $this->database->table("orders")->fetchAll();
+        return $orders;
     }
 
-    public function createOrder($food, $status, $about, $stul, $userId):bool{
-        $this->table->insert([
+    public function createOrder($food, $status, $about, $stul, $userId):int{
+        $row = $this->table->insert([
             'food_id' => $food,
             'status' => $status,
             'about' => $about,
             'user_id' => $userId,
+            'table_id' => intval($stul),
         ]);
-        return true;
+        $foodData = $this->database->table("foods")->where('id', $food)->update([
+            'quantity-=' => 1,
+        ]);
+
+        return $row->id;
     }
 
-    public function addTable():bool{
-        $this->table->insert([
-            'ordersid' => -1,   //-1 => no order
-            'isused' => 0,
-        ]);
-        return true;
-    }
-    public function delTable($id){
-        $result = $this->table->where('id', $id)->delete();
+    public function delOrder($id){
+        $result = $this->database->table("orders")->where('id', $id)->delete();
         return $result;
+    }
+
+    public function changeStatus(int $id, string $status):void{
+        $result = $this->database->table("orders")->where('id', $id)->update([
+            'status' => $status,
+        ]);
     }
 
     /**
@@ -61,15 +62,17 @@ final class Orderator
         return $result;
     }
 
-
-
-    public function showAllTableOrders(){
-        $tableArray = $this->showAllTables();
-        $result = [];
-        foreach($this->table as $item) {
-            $order = $this->showTableOrder($item->id);
-            array_push($result, $this->showFood($order->food_id));   
+    public function showAllTableOrders($tableID):array{
+        $table = $this->database->table('orders')->where('table_id', $tableID);
+        $result = array();
+        foreach($table as $item) {
+            $result += [$item->id => $item];
         }
         return $result;
+    }
+
+    public function isFoodInOrder($foodID):bool{
+        $result = $this->database->table('orders')->where('food_id', $foodID)->fetch();
+        return isset($result);
     }
 }

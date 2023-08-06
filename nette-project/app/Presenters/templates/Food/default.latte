@@ -2,9 +2,14 @@
 {block name}FOOD{/block}
 {block content}
     <section class="viewStuff">
-        <div class="form-box">
+        <div class="addFoodIcon">
+            <i class="material-icons" onclick="showCreateOrder()">add</i>
+        </div>
+        <!-- hidden formulare -->
+        <section class="Orders-flex" id="hid1">
         <h3>Add food</h3>
-        <div class="form-box-flex">
+        <i class="material-icons" style="position: absolute; top: 15px;  right: 15px;" onclick="hideCreateOrder('hid1')">close</i>
+        <section class="form-box-flex">
         {form foodForm}
             <div class="form-group">
                 {input name, class => "form-control"}
@@ -23,17 +28,19 @@
                 {input image, class => "form-control"}
                 Upload Image
             </label>
-            </div>
+            </section>
             <div class="form-group">
                 {input send, class => "form-send-alter"}
             </div>
         {/form}
+        </section>
 
-        </div>
-        <h3>Foods</h3>
+
+        <!-- flex jidla -->
         <div class="foodsContainer">
         {foreach $foods as $food}
             <div class="foodsFlexItem">
+            <a class="material-icons" n:href="deleteFood! $food->id">close</a>
             <h3>{$food->name}</h3>
             <section>
                 <p>Quantity: {$food->quantity}</p>
@@ -44,6 +51,18 @@
         {/foreach}
         </div>  
     </section>
+
+
+<script n:syntax="off">
+    function showCreateOrder() {
+        var formular = document.getElementById('hid1');
+        formular.classList.toggle("shown");
+    }
+    function hideCreateOrder() {
+        var formular = document.getElementById('hid1');
+        formular.classList.toggle("shown");
+    }
+</script>
 {/block}
 {block footer}
 <footer>

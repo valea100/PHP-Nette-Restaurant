@@ -69,4 +69,7 @@ final class Imaginator
         } else return false;
     }
 
+    public function deleteImage($foodID):void{
+        $result = $this->database->table('food_images')->where('food_id', $foodID)->delete();
+    }
 }

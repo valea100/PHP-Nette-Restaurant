@@ -1,18 +1,150 @@
-{block title}Tables{/block}
 {block name}ORDERS{/block}
 {block content}
 <section class="viewStuff">
-    <section class="groupControls">
-    <div><h3>CREATE ORDER</h3>
-        {control orderForm}
-    </div>
-    <div><h3>CHANGE ORDER</h3>
-        {control deleteForm}
-    </div>
+
+    <!-- hidden formulare -->
+    <section class="Orders-flex" id="hid1">
+        <div>
+            <div style="display: flex; margin: 10px; ">
+                <h3 style="width: 60%;">CREATE ORDER</h3>
+                <i class="material-icons" style="position: absolute; top: 15px;  right: 15px;" onclick="hideCreateOrder('hid1')">close</i>
+            </div>
+            {form orderForm}
+                <div class="form-group">
+                    <select class="form-control" name="selectedTable">
+                        {foreach $tablesID as $id => $row}
+                        <option value="{$id}">{$id}</option>
+                        {/foreach}
+                    </select>
+                    <label for="" class="form-label">Table</label>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" name="selectedFood" id="mySelect">
+                        {foreach $foods as $food}
+                            <option value="{$food->id}">{$food->name}</option>
+                        {/foreach}
+                    </select>
+                    <label for="" class="form-label">Food</label>
+                </div>
+                {input send, class => "form-send"}
+            {/form}
+        </div>
     </section>
-    <div><h3>Orders</h3>
-    </div>
+
+    <section class="Orders-flex" id="hid2">
+        <div style="display: flex; margin: 10px; ">
+            <h3>DELETE ORDER</h3>
+            <i class="material-icons" style="position: absolute; top: 15px;  right: 15px;" onclick="hideCreateOrder('hid2')">close</i>
+        </div>
+        {form deleteForm}
+            <div class="form-group">
+                <select class="form-control" name="selectedOrder" id="deleteSelectOrder">
+                        {foreach $myOrders as $id => $row}
+                        <option value="{$id}">{$id}</option>
+                        {/foreach}
+                </select>
+                <label for="" class="form-label">Order</label>
+            </div>
+
+            {input delete, class => "form-send"}
+        {/form}
+    </section>
+    
+    <section class="Orders-flex" id="hid3">
+        <div style="display: flex; margin: 10px; ">
+            <h3>CHANGE ORDER</h3>
+            <i class="material-icons" style="position: absolute; top: 15px;  right: 15px;" onclick="hideCreateOrder('hid3')">close</i>
+        </div>
+        {form statusForm}
+            <div class="form-group">
+                <select class="form-control" name="selectedOrder" id="statusOrderSelect">
+                    {foreach $myOrders as $id => $row}
+                        <option value="{$id}">{$id}</option>
+                        {/foreach}
+                </select>
+                <label for="" class="form-label">Order</label>
+            </div>
+            <div class="form-group">
+                {input selectedStatus, class => "form-control", name => "selectedStatus"}
+                <label for="" class="form-label">Status</label>
+            </div>
+
+            {input change, class => "form-send"}
+        {/form}
+    </section>
+
+    <!-- flexbox objednavky na ktere se klika -->
+    <section class="foodsContainer">
+        {foreach $foods as $food}
+            <div class="foodsFlexItem-reactive" onclick="selectFood({$food->id})">
+                <h1>{$food->name}</h1>
+                <section>
+                        <p>Quantity: {$food->quantity}</p>
+                    <p>Price: {$prices[$food->id]->price}</p>
+                </section>
+                <img src='/{$images[$food->id]}' alt="foodImage" class="foodImage">
+            </div>
+        {/foreach}
+    </section>
+
+    <!-- Zobrazeni vsech objednavek -->
+    <section class="orders">
+        <h3>Orders</h3>
+        <table>
+            <tr class="viewNadpis">
+                <th>Order ID</th>
+                <th>Food Name</th>
+                <th>Table</th>
+                <th>Stav</th>
+            </tr>
+        {foreach $myOrders as $item}
+            <tr>
+                <th>{$item->id}</th>
+                <th>{$foods[$item->food_id]->name}</th>
+                <th>{$item->table_id}</th>
+                <th>{$item->status}</th>
+                <th style="width: 15%"><button type="button" class="ButtonChangeOrder" onclick="changeOrder({$item->id})">Change Status</button></th>                
+                <th><i class="material-icons" onclick="deleteOrder({$item->id})">delete</i></th>
+            </tr>
+        {/foreach}
+        </table>
+    </section>
+
 </section>
+
+<script n:syntax="off">
+    function deleteOrder(selectedOrder) {
+        const $formOrder = document.getElementById('deleteSelectOrder');
+        $formOrder.value = selectedOrder;
+        var formular = document.getElementById('hid2');
+        if (!(formular.classList.contains("shown"))) {
+            formular.classList.toggle("shown");
+        }
+    }
+
+    function changeOrder(selectedOrder){
+        const $formOrder = document.getElementById('statusOrderSelect');
+        $formOrder.value = selectedOrder;
+        var formular = document.getElementById('hid3');
+        if (!(formular.classList.contains("shown"))) {
+            formular.classList.toggle("shown");
+        }
+    }
+
+    function hideCreateOrder(id) {
+        var formular = document.getElementById(id);
+        formular.classList.toggle("shown");
+    }
+
+    function selectFood(selectedFood) {
+        const $selected = document.querySelector('#mySelect');
+        $selected.value = selectedFood;
+        var formular = document.getElementById('hid1');
+        if (!(formular.classList.contains("shown"))) {
+            formular.classList.toggle("shown");
+        }
+    }
+</script>
 {/block}
 {block footer}
 <footer>

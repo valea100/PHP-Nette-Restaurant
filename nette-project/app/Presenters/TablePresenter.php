@@ -33,7 +33,7 @@ final class TablePresenter extends HomePresenter
     }
 
     public function renderDefault():void{
-        $this->template->tableTables = $this->stolator->showAllTables();
+        //$this->template->tableTables = $this->stolator->showAllTables();
         $this->template->orderFood = $this->stolator->showAllTableOrders();
     }
     protected function createComponentTableForm(): Form{

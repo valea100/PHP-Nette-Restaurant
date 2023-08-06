@@ -81,7 +81,9 @@ final class Jidlator
         }
     }
 
-
+    public function deleteFood($foodID):void{
+        $result = $this->database->table("foods")->where('id', $foodID)->delete();
+    }
 
 
 

@@ -67,6 +67,12 @@ final class FoodPresenter extends HomePresenter
         return $form;
     }
 
+    public function createComponentDeleteFoodForm(): Form{
+        $form = $this->foodFormFactory->create();
+        $form->onSuccess[] = [$this, 'foodDelete'];
+        return $form;
+    }
+
     public function foodSuccess(Form $form, $data){
         $images = $data->image;
         if(!($this->saveImage($images, $data))){
@@ -91,6 +97,18 @@ final class FoodPresenter extends HomePresenter
             $this->imaginator->insertImage($myPath, $image->getHeight(), $image->getWidth(), $this->jidlator->getFoodId($data->name), $hashName);
             return true;
         }else return false; //exception sem
+    }
+
+    public function handleDeleteFood($food): void
+    {
+        if($this->orderator->isFoodInOrder($food)){
+            //pridat do renderu nejake info
+        }
+        else{
+            $this->cenator->deletePrice($food);
+            $this->imaginator->deleteImage($food);
+            $this->jidlator->deleteFood($food);
+        }
     }
 
 }

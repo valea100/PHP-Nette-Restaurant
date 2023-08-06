@@ -7,6 +7,7 @@
 	<title>{ifset title}{include title|stripHtml} | {/ifset}restaurace</title>
 	<link rel="stylesheet" href="{$basePath}/css/style.css">
 	<link rel="stylesheet" href="{$basePath}/css/formStyle.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <body>
@@ -15,6 +16,7 @@
         	<li><a n:href="Viewer:default"><img src="{$basePath}/img/jkLogo.png" alt="peroule" width="80" height="60"></a></li>
         	<li>{include name}</li>
     	</ul>
+    	<div class="logout-icon"><a class="material-icons" n:href="signOut">logout</a>
 	</header>
 	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
 
@@ -22,15 +24,14 @@
 	<nav class="menu">
     	<ul>
         	<li><a class="btn-grad" n:href="Viewer:default">home</a></li>
-    	    <li><a class="btn-grad" n:href="Order:default">Create order</a></li>
-        	<li><a class="btn-grad" n:href="Table:default">Add table</a></li>
-	        <li><a class="btn-grad" n:href="Food:default">Add foods</a></li>
-    	    <li><a class="btn-grad" n:href="Viewer:groups">Manage groups</a></li>
-	        <li><a class="btn-grad" n:href="Price:default">change prices</a></li>
-    	    <li><a class="btn-grad" n:href="Viewer:default">Settings</a></li>
-        	<li><a class="btn-grad" n:href="signOut">Logout</a></li>
+    	    <li><a class="btn-grad" n:href="Order:default">Orders</a></li>
+        	<li><a class="btn-grad" n:href="Table:default">Tables</a></li>
+	        <li><a class="btn-grad" n:href="Food:default">Foods</a></li>
+    	    <li><a class="btn-grad" n:href="Viewer:groups">Groups</a></li>
+	        <li><a class="btn-grad" n:href="Price:default">Prices</a></li>
     	</ul>
 	</nav>
+	<div style="width: 15em;"></div>
 	{include content}
 	</section>
 	{include footer}

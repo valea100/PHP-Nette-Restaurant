@@ -52,6 +52,7 @@ footer{
     transform:scale(1.05,1.05);
   }
  .menu {
+   position: fixed;
     display: inline-block;
     margin-top: 1em;
     margin-bottom: 2em;
@@ -167,6 +168,7 @@ footer{
    padding-bottom: 1em;
    width: 100%;
    height: 100%;
+   border-radius: 5px;
 }
 .groupControls {
    display: flex;
@@ -236,24 +238,119 @@ footer{
 }
 
 .foodsContainer {
+   margin-top: 10px;
    display: flex;
    flex-wrap: wrap;
-   justify-content: space-evenly;
    align-content: flex-start;
-   row-gap: 10px;
-   column-gap: 10px;
+   row-gap: 5px;
+   column-gap: 5px;
 }
-
 .foodsFlexItem {
-   padding: 20px;
+   padding: 10px;
    margin: 10px;
    background-color: rgba(255, 255, 255, .295);
    box-shadow: 0 0 5px #3d3d3d49;
    border-radius: 10px;
+   transition: .3s;
+}
+.foodsFlexItem-reactive {
+   padding: 10px;
+   margin: 10px;
+   background-color: rgba(255, 255, 255, .295);
+   box-shadow: 0 0 5px #3d3d3d49;
+   border-radius: 10px;
+   transition: .3s;
+
+}
+.foodsFlexItem-reactive:hover{
+   cursor: pointer;
+   transform:scale(1.05, 1.05);
+}
+.foodsFlexItem p {
+   font-size: 14px;
+}
+.foodsFlexItem h1 {
+   margin: 0%;
+   padding: 0%;
 }
 .foodImage {
-   width: 220px;
-   height: 180px;
+   width: 180px;
+   height: 150px;
    border-radius: 5px;
 }
 
+.orders {
+   width: 60%;
+}
+
+
+i{
+   cursor: pointer;
+   transition:all .3s;
+}
+i:hover{
+   transform: scale(1.05, 1.05);
+   color: white;
+}
+
+.orders i:hover{
+   color: darkred;
+}
+
+.ButtonChangeOrder {
+   cursor: pointer;
+   font-family: 'Roboto Mono', monospace;
+   background-color: rgba(149, 165, 166, 1);
+   border: none;
+   color: black;
+   padding: 3px;
+   margin-bottom: 2px;
+   margin-right: 5px;
+   width: 100%;
+   border-radius: 3px;
+   transition:all .3s;
+   box-shadow: 0 0 5px #3d3d3d49;
+}
+
+.ButtonChangeOrder:hover {
+   transform: scale(1.05, 1.05);
+   color: white;
+}
+
+.addFoodIcon i{
+   background-color: rgba(149, 165, 166, 1.0);
+   border-radius: 5px;
+   padding: 15px;
+   color: white;
+}
+
+.addFoodIcon i:hover{
+   color: black;
+}
+
+.foodsFlexItem a{
+   float: right;
+   text-decoration: none;
+   color: black;
+   transition:all .3s;
+}
+.foodsFlexItem a:hover{
+   color: darkred;
+   transform: scale(1.05, 1.05);
+}
+.logout-icon{
+      position: fixed;
+      top: 15px;
+      right: 20px;
+}
+.logout-icon a{
+   text-decoration: none;
+   color: black;
+   transition:all .3s;
+   font-size: 48px;
+}
+
+.logout-icon a:hover{
+   transform: scale(1.05, 1.05);
+   color: darkred;
+}
